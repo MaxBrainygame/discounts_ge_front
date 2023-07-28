@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.discounts_ge_front">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="discounts_ge_front"
         android:name="${applicationName}"

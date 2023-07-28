@@ -1,0 +1,58 @@
+{
+    "stores": [
+      {
+        "name": "Store 1",
+        "logoUrl": "https://psp.ge/logo.png",
+        "discounts": [
+          {
+            "name": "Discount 1",
+            "description": "Description of discount 1",
+            "products": [
+              {
+                "name": "Product 1",
+                "description": "Description of product 1"
+              },
+              {
+                "name": "Product 2",
+                "description": "Description of product 2"
+              }
+            ]
+          },
+          {
+            "name": "Discount 2",
+            "description": "Description of discount 2",
+            "products": [
+              {
+                "name": "Product 3",
+                "description": "Description of product 3"
+              },
+              {
+                "name": "Product 4",
+                "description": "Description of product 4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Store 2",
+        "logoUrl": "https://www.aversi.ge/images/logo.png",
+        "discounts": [
+          {
+            "name": "Discount 3",
+            "description": "Description of discount 3",
+            "products": [
+              {
+                "name": "Product 5",
+                "description": "Description of product 5"
+              },
+              {
+                "name": "Product 6",
+                "description": "Description of product 6"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
