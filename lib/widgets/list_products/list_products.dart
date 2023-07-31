@@ -1,33 +1,32 @@
-
-import 'package:discounts_ge_front/domain/entity/shop.dart';
-import 'package:discounts_ge_front/widgets/list_promotions/list_promotions_model.dart';
+import 'package:discounts_ge_front/domain/entity/promotion.dart';
+import 'package:discounts_ge_front/widgets/list_products/list_products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ListPromotions extends StatefulWidget {
+class ListProducts extends StatefulWidget {
 
-  const ListPromotions({Key? key}) : super(key: key);
+  const ListProducts({Key? key}) : super(key: key);
 
   @override
-  _ListPromotionsState createState() => _ListPromotionsState();
+  _ListProductsState createState() => _ListProductsState();
 }
 
-class _ListPromotionsState extends State<ListPromotions> {
-  final model = ListPromotionModel();
-  late Shop shop;
+class _ListProductsState extends State<ListProducts> {
+  final model = ListProductsModel();
+  late Promotion promotion;
 
   @override
   Widget build(BuildContext context) {
     RouteSettings? settings = ModalRoute.of(context)?.settings;
-    shop = settings!.arguments as Shop;
-    model.reloadPromotions(shop.host);
+    promotion = settings!.arguments as Promotion;
+    model.reloadProducts(promotion);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Promotions'),
+        title: const Text('Products'),
         centerTitle: true,
       ),
       body: SafeArea(
-        child: ListPromotionModelProvider(
+        child: ListProductsModelProvider(
           model: model,
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,7 +35,7 @@ class _ListPromotionsState extends State<ListPromotions> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: _PromotionsWidget(),
+                  child: _ProductsWidget(),
                 ),
               ),
             ],
@@ -47,36 +46,36 @@ class _ListPromotionsState extends State<ListPromotions> {
   }
 }
 
-class _PromotionsWidget extends StatelessWidget {
-  const _PromotionsWidget({Key? key}) : super(key: key);
+class _ProductsWidget extends StatelessWidget {
+  const _ProductsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: ListPromotionModelProvider.watch(context)?.model.promotions.length ?? 0,
+      itemCount: ListProductsModelProvider.watch(context)?.model.products.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
-        return _PromotionsRowWidget(index: index);
+        return _ProductsRowWidget(index: index);
       },
     );
   }
 }
 
-class _PromotionsRowWidget extends StatelessWidget {
+class _ProductsRowWidget extends StatelessWidget {
   final int index;
-  const _PromotionsRowWidget({Key? key, required this.index}) : super(key: key);
+  const _ProductsRowWidget({Key? key, required this.index}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    final promotion = ListPromotionModelProvider.read(context)!.model.promotions[index];
+    final product = ListProductsModelProvider.read(context)!.model.products[index];
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/goods', arguments: promotion);
+            // Navigator.pushNamed(context, '/promotions', arguments: shop);
           },
-          child: getImage(promotion.picture),
+          child: getImage(product.picture),
         ),
         // Text(shop.host),
         // const SizedBox(height: 10),
@@ -97,4 +96,4 @@ Widget getImage(srcLogo) {
       return Image.network(srcLogo);
     } 
 
-} 
+}
