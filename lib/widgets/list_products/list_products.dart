@@ -71,6 +71,7 @@ class _ProductsRowWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const Icon(Icons.shopping_cart),
         GestureDetector(
           onTap: () {
             // Navigator.pushNamed(context, '/promotions', arguments: shop);

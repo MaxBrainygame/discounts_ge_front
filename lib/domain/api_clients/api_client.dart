@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:discounts_ge_front/domain/entity/categories.dart';
 import 'package:discounts_ge_front/domain/entity/product.dart';
 import 'package:discounts_ge_front/domain/entity/promotion.dart';
 import 'package:discounts_ge_front/domain/entity/shop.dart';
@@ -9,9 +10,19 @@ class ApiClient {
 
   final client = HttpClient();
 
-  Future<List<Shop>> getShops() async {
+  Future<List<Categories>> getCategories() async {
 
-    final json = await get('http://10.0.2.2:8080/stores') as List<dynamic>;
+    final json = await get('http://10.0.2.2:8080/categories') as List<dynamic>;
+    final categories = json.map((dynamic e) => Categories.fromJson(e as Map<String, dynamic>)).toList();
+
+    return categories;
+
+  }
+
+  Future<List<Shop>> getShops(Categories category) async {
+
+    final key = category.key; 
+    final json = await get('http://10.0.2.2:8080/stores?key=$key') as List<dynamic>;
     // final json = await get('http://65.0.125.153:8080/offers') as List<dynamic>;
     final shops = json.map((dynamic e) => Shop.fromJson(e as Map<String, dynamic>)).toList();
 

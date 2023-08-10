@@ -1,4 +1,5 @@
 import 'package:discounts_ge_front/domain/api_clients/api_client.dart';
+import 'package:discounts_ge_front/domain/entity/categories.dart';
 import 'package:discounts_ge_front/domain/entity/shop.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,8 +10,8 @@ class ListShopsModel extends ChangeNotifier {
   var _shops = <Shop>[];
   List<Shop> get shops => _shops;
 
-  Future<void> reloadShops() async{
-    _shops = await apiClient.getShops();
+  Future<void> reloadShops(Categories category) async{
+    _shops = await apiClient.getShops(category);
     notifyListeners();
   }
 
