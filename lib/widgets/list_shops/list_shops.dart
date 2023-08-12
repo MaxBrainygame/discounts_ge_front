@@ -24,6 +24,7 @@ class _ListShopsState extends State<ListShops> {
       appBar: AppBar(
         title: const Text('Shops'),
         centerTitle: true,
+        
       ),
       body: SafeArea(
         child: ListShopsModelProvider(
@@ -66,9 +67,9 @@ class _ShopsWidget extends StatelessWidget {
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20),
+            // childAspectRatio: 3 / 2,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 3.0),
         itemCount:
             ListShopsModelProvider.watch(context)?.model.shops.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
@@ -92,35 +93,58 @@ class _ShopsRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final shop = ListShopsModelProvider.read(context)!.model.shops[index];
 
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(15)),
-      child: GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/promotions', arguments: shop);
-          },
-          child: getImage(shop.logo),
-        )
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/promotions', arguments: shop);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child: Container(
+          padding: const EdgeInsets.only(top: 5, bottom: 5),
+          decoration: BoxDecoration(    
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+              width: 2,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 120,
+                width: 120,
+                child: Container(child: getImage(shop.logo)),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                shop.name,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
 
-    // return Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: <Widget>[
-    //     GestureDetector(
+    // return Container(
+    //   alignment: Alignment.center,
+    //   decoration: BoxDecoration(
+    //     border: Border.all(color: Colors.black),
+    //     borderRadius: BorderRadius.circular(15)),
+    //   child: GestureDetector(
     //       onTap: () {
     //         Navigator.pushNamed(context, '/promotions', arguments: shop);
     //       },
     //       child: getImage(shop.logo),
-    //     ),
-    //     // Text(shop.host),
-    //     // const SizedBox(height: 10),
-    //     // getImage(shop.logo),
-    //     // const SizedBox(height: 10),
-    //     // Text(shop.name),
-    //     const SizedBox(height: 40),
-    //   ],
+    //     )
     // );
   }
 }
