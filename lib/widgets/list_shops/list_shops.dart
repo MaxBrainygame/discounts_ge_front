@@ -1,6 +1,7 @@
 import 'package:discounts_ge_front/domain/entity/categories.dart';
+import 'package:discounts_ge_front/generated/l10n.dart';
+import 'package:discounts_ge_front/widgets/bottom_bar_custom.dart';
 import 'package:discounts_ge_front/widgets/list_shops/list_shops_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,10 +23,10 @@ class _ListShopsState extends State<ListShops> {
     model.reloadShops(category);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shops'),
+        title: Text(S.of(context).shops),
         centerTitle: true,
-        
       ),
+      bottomNavigationBar: BottomBarWidget(),
       body: SafeArea(
         child: ListShopsModelProvider(
           model: model,
@@ -125,7 +126,7 @@ class _ShopsRowWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ],

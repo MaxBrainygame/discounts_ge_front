@@ -1,4 +1,5 @@
 import 'package:discounts_ge_front/domain/entity/promotion.dart';
+import 'package:discounts_ge_front/widgets/bottom_bar_custom.dart';
 import 'package:discounts_ge_front/widgets/list_products/list_products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +25,7 @@ class _ListProductsState extends State<ListProducts> {
         title: const Text('Products'),
         centerTitle: true,
       ),
+      bottomNavigationBar: BottomBarWidget(),
       body: SafeArea(
         child: ListProductsModelProvider(
           model: model,

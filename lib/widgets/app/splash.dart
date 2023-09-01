@@ -17,18 +17,17 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListCategories()));
     });
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(),
-            const Column(
+            Column(
               children: [
-                Text('Flutter\n') 
+                Image.asset('assets/icons/logo.png')
               ],
             ),
-            const Text('powered by Flutter\n')
           ],
         ),
       ),
