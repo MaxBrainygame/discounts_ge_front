@@ -30,7 +30,8 @@ class _ListCategoriesState extends State<ListCategories> {
         centerTitle: true,
         actions: [
           Consumer<LocaleProvider>(
-            builder: (context, localeModel, child) => PopupMenuButton<Locale>(
+            builder: (context, localeModel, child) => 
+              Padding(padding: EdgeInsets.all(10), child: PopupMenuButton<Locale>(
               onSelected: (value) {
                 setState(() {
                   S.delegate.load(value);
@@ -46,7 +47,8 @@ class _ListCategoriesState extends State<ListCategories> {
                 }).toList();
               },
               child: Icon(Icons.language),
-            ),
+            )
+          ),
           ),
         ],
       ),

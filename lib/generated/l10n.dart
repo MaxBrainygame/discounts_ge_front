@@ -60,11 +60,31 @@ class S {
     );
   }
 
+  /// `Promotions`
+  String get promotions {
+    return Intl.message(
+      'Promotions',
+      name: 'promotions',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Shops`
   String get shops {
     return Intl.message(
       'Shops',
       name: 'shops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products`
+  String get products {
+    return Intl.message(
+      'Products',
+      name: 'products',
       desc: '',
       args: [],
     );
@@ -77,6 +97,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'be'),
+      Locale.fromSubtags(languageCode: 'ka'),
       Locale.fromSubtags(languageCode: 'ru'),
     ];
   }

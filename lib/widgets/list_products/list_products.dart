@@ -1,4 +1,5 @@
 import 'package:discounts_ge_front/domain/entity/promotion.dart';
+import 'package:discounts_ge_front/generated/l10n.dart';
 import 'package:discounts_ge_front/widgets/bottom_bar_custom.dart';
 import 'package:discounts_ge_front/widgets/list_products/list_products_model.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _ListProductsState extends State<ListProducts> {
     model.reloadProducts(promotion);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: Text(S.of(context).products),
         centerTitle: true,
       ),
       bottomNavigationBar: BottomBarWidget(),

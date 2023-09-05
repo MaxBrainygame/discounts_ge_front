@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a ru locale. All the
+// This is a library that provides messages for a ka locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,13 +18,13 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'ru';
+  String get localeName => 'ka';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "categories": MessageLookupByLibrary.simpleMessage("Категории"),
-        "products": MessageLookupByLibrary.simpleMessage("Товары"),
-        "promotions": MessageLookupByLibrary.simpleMessage("Акции"),
-        "shops": MessageLookupByLibrary.simpleMessage("Магазины")
+        "categories": MessageLookupByLibrary.simpleMessage("კატეგორიები"),
+        "products": MessageLookupByLibrary.simpleMessage("საქონელი"),
+        "promotions": MessageLookupByLibrary.simpleMessage("აქციები"),
+        "shops": MessageLookupByLibrary.simpleMessage("მაღაზიებს")
       };
 }

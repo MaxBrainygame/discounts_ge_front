@@ -1,4 +1,6 @@
 {
     "categories": "Категории",
-    "shops": "Магазины"
+    "promotions": "Акции",
+    "shops": "Магазины",
+    "products": "Товары"
 }
