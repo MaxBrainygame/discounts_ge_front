@@ -5,6 +5,7 @@ import 'package:discounts_ge_front/domain/entity/categories.dart';
 import 'package:discounts_ge_front/domain/entity/product.dart';
 import 'package:discounts_ge_front/domain/entity/promotion.dart';
 import 'package:discounts_ge_front/domain/entity/shop.dart';
+import 'package:intl/intl.dart';
 
 class ApiClient {
 
@@ -12,7 +13,8 @@ class ApiClient {
 
   Future<List<Categories>> getCategories() async {
 
-    final json = await get('http://10.0.2.2:8080/categories') as List<dynamic>;
+    final lang = Intl.getCurrentLocale();
+    final json = await get('http://10.0.2.2:8080/categories?lang=$lang') as List<dynamic>;
     final categories = json.map((dynamic e) => Categories.fromJson(e as Map<String, dynamic>)).toList();
 
     return categories;
@@ -22,7 +24,8 @@ class ApiClient {
   Future<List<Shop>> getShops(Categories category) async {
 
     final key = category.key; 
-    final json = await get('http://10.0.2.2:8080/stores?key=$key') as List<dynamic>;
+    final lang = Intl.getCurrentLocale();
+    final json = await get('http://10.0.2.2:8080/stores?key=$key&lang=$lang') as List<dynamic>;
     // final json = await get('http://65.0.125.153:8080/offers') as List<dynamic>;
     final shops = json.map((dynamic e) => Shop.fromJson(e as Map<String, dynamic>)).toList();
 
@@ -32,7 +35,9 @@ class ApiClient {
 
   Future<List<Promotion>> getPromotions(String shopHost) async {
 
-    final json = await get('http://10.0.2.2:8080/promotions?store=$shopHost') as List<dynamic>;
+    final lang = Intl.getCurrentLocale();
+
+    final json = await get('http://10.0.2.2:8080/promotions?store=$shopHost&lang=$lang') as List<dynamic>;
     // final json = await get('http://65.0.125.153:8080/offers') as List<dynamic>;
     final promotions = json.map((dynamic e) => Promotion.fromJson(e as Map<String, dynamic>)).toList();
 
@@ -43,8 +48,9 @@ class ApiClient {
   Future<List<Product>> getProducts(Promotion promotion) async {
 
     final host = promotion.url;
+    final lang = Intl.getCurrentLocale();
 
-    final json = await get('http://10.0.2.2:8080/products?discount=$host');
+    final json = await get('http://10.0.2.2:8080/products?discount=$host&lang=$lang');
     if (json == null) {
       List<Product> listProducts = [];
       listProducts.add(
