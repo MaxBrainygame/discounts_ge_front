@@ -102,7 +102,7 @@ class _ShopsRowWidget extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           padding: const EdgeInsets.only(top: 5, bottom: 5),
-          decoration: BoxDecoration(    
+          decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
@@ -121,12 +121,14 @@ class _ShopsRowWidget extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                shop.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
+              Flexible(
+                child: Text(
+                  shop.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ],

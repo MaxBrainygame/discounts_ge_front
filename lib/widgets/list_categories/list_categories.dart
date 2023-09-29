@@ -1,6 +1,5 @@
 import 'package:discounts_ge_front/generated/l10n.dart';
 import 'package:discounts_ge_front/widgets/app/locale_provider.dart';
-import 'package:discounts_ge_front/widgets/app/my_app.dart';
 import 'package:discounts_ge_front/widgets/bottom_bar_custom.dart';
 import 'package:discounts_ge_front/widgets/list_categories/list_categories_model.dart';
 import 'package:flutter/material.dart';
@@ -30,25 +29,25 @@ class _ListCategoriesState extends State<ListCategories> {
         centerTitle: true,
         actions: [
           Consumer<LocaleProvider>(
-            builder: (context, localeModel, child) => 
-              Padding(padding: EdgeInsets.all(10), child: PopupMenuButton<Locale>(
-              onSelected: (value) {
-                setState(() {
-                  S.delegate.load(value);
-                  localeModel.setLocale(value);
-                });
-              },
-              itemBuilder: (BuildContext context) {
-                return S.delegate.supportedLocales.map((Locale choice) {
-                  return PopupMenuItem<Locale>(
-                    value: choice,
-                    child: Text(choice.toLanguageTag()),
-                  );
-                }).toList();
-              },
-              child: Icon(Icons.language),
-            )
-          ),
+            builder: (context, localeModel, child) => Padding(
+                padding: EdgeInsets.all(10),
+                child: PopupMenuButton<Locale>(
+                  onSelected: (value) {
+                    setState(() {
+                      S.delegate.load(value);
+                      localeModel.setLocale(value);
+                    });
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return S.delegate.supportedLocales.map((Locale choice) {
+                      return PopupMenuItem<Locale>(
+                        value: choice,
+                        child: Text(choice.toLanguageTag()),
+                      );
+                    }).toList();
+                  },
+                  child: Icon(Icons.language),
+                )),
           ),
         ],
       ),
