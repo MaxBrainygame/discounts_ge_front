@@ -1,9 +1,12 @@
+// import 'package:advance_pdf_viewer2/advance_pdf_viewer.dart';
+import 'package:discounts_ge_front/domain/entity/product.dart';
 import 'package:discounts_ge_front/domain/entity/promotion.dart';
 import 'package:discounts_ge_front/generated/l10n.dart';
 import 'package:discounts_ge_front/widgets/bottom_bar_custom.dart';
 import 'package:discounts_ge_front/widgets/list_products/list_products_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ListProducts extends StatefulWidget {
   const ListProducts({Key? key}) : super(key: key);
@@ -15,6 +18,19 @@ class ListProducts extends StatefulWidget {
 class _ListProductsState extends State<ListProducts> {
   final model = ListProductsModel();
   late Promotion promotion;
+  // bool _isLoading = true;
+  // late PDFDocument? pdfDocument;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loadDocument();
+  // }
+
+  // Future<void> loadDocument() async {
+  //   pdfDocument = await PDFDocument.fromURL('http://nikorasupermarket.ge/modules/catalogues/uploads/42.pdf');
+  //   setState(() => _isLoading = false);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +43,14 @@ class _ListProductsState extends State<ListProducts> {
         centerTitle: true,
       ),
       bottomNavigationBar: BottomBarWidget(),
+      // body: Center(
+      //     child: _isLoading
+      //         ? Center(child: CircularProgressIndicator())
+      //         : pdfDocument != null ? PDFViewer(document: pdfDocument!): Text('No document available'))
       body: SafeArea(
         child: ListProductsModelProvider(
           model: model,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // _ReloadButton(),
@@ -40,7 +60,7 @@ class _ListProductsState extends State<ListProducts> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: _ProductsWidget(),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -54,24 +74,26 @@ class _ProductsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            // childAspectRatio: 3 / 2,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 3.0),
-        itemCount:
-            ListProductsModelProvider.watch(context)?.model.products.length ?? 0,
-        itemBuilder: (BuildContext context, int index) {
-          return _ProductsRowWidget(index: index);
-        });
-    // return ListView.builder(
-    //   itemCount:
-    //       ListProductsModelProvider.watch(context)?.model.products.length ?? 0,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return _ProductsRowWidget(index: index);
-    //   },
-    // );
+    final products = ListProductsModelProvider.read(context)?.model.products;
+    if (products?.length == 1 && products?[0].picture == "") {
+      return SfPdfViewer.network(
+          ListProductsModelProvider.read(context)!.model.products[0].url,
+          scrollDirection: PdfScrollDirection.horizontal,
+          pageLayoutMode: PdfPageLayoutMode.single);
+    } else {
+      return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              // childAspectRatio: 3 / 2,
+              crossAxisSpacing: 4.0,
+              mainAxisSpacing: 3.0),
+          itemCount:
+              ListProductsModelProvider.watch(context)?.model.products.length ??
+                  0,
+          itemBuilder: (BuildContext context, int index) {
+            return _ProductsRowWidget(index: index);
+          });
+    }
   }
 }
 
@@ -83,6 +105,8 @@ class _ProductsRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final product =
         ListProductsModelProvider.read(context)!.model.products[index];
+
+    // return SfPdfViewer.network(product.url);
 
     return Container(
       // padding: const EdgeInsets.all(10),
@@ -117,7 +141,7 @@ class _ProductsRowWidget extends StatelessWidget {
                 )),
             Row(
               children: [
-                Text(   
+                Text(
                   product.finalPrice.toString(),
                   style: const TextStyle(
                     fontSize: 14,
@@ -126,17 +150,14 @@ class _ProductsRowWidget extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text(   
+                Text(
                   product.regularPrice.toString(),
                   style: const TextStyle(
-                    fontSize: 14,
-                    // fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                    decoration: TextDecoration.lineThrough
-                  ),
+                      fontSize: 14,
+                      // fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                      decoration: TextDecoration.lineThrough),
                 ),
-                
-                
               ],
             )
           ],

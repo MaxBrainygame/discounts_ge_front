@@ -1,8 +1,6 @@
-import 'dart:typed_data';
 
 import 'package:discounts_ge_front/generated/l10n.dart';
 import 'package:discounts_ge_front/widgets/app/locale_provider.dart';
-import 'package:intl/intl.dart';
 import 'package:discounts_ge_front/widgets/app/splash.dart';
 import 'package:discounts_ge_front/widgets/list_categories/list_categories.dart';
 import 'package:discounts_ge_front/widgets/list_products/list_products.dart';
